@@ -1,4 +1,7 @@
+import { ThemeProvider } from '@emotion/react';
 import * as NextImage from 'next/image';
+
+import theme from '../styles/theme';
 
 const BREAKPOINTS_INT = {
   mobile: 360,
@@ -42,3 +45,11 @@ export const parameters = {
   },
   viewport: { viewports: customViewports },
 };
+
+export const decorators = [
+  (Story) => (
+    <ThemeProvider theme={theme}>
+      <Story />
+    </ThemeProvider>
+  ),
+];
