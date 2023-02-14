@@ -11,7 +11,8 @@
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "create-component": "./create-component.sh"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
