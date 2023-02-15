@@ -4,7 +4,9 @@ The purpose of this app is for my own development; My goal is to create a Next.j
 
 ## Getting Started
 
-The project uses yarn to install dependencies.
+### Running the app locally
+
+To install dependencies run `yarn`.
 
 To run the development server:
 
@@ -12,7 +14,35 @@ To run the development server:
 yarn dev
 ```
 
-You can the open the app at [http://localhost:3000](http://localhost:3000)
+You can then open the app at [http://localhost:3000](http://localhost:3000)
+
+### Storybook
+
+Storybook is set up on this project so that components can be built, viewed, and tested in isolation.
+
+To run Storybook:
+
+```bash
+yarn storybook
+```
+
+### Creating Components
+
+I have set up a script that will create a component from a template. This component will come with a mock data file and storybook file which consumes the mock data.
+
+To run this script:
+
+```bash
+yarn create-component <location> <ComponentName>
+```
+
+The project using atomic design so location must be either 'atoms', 'molecules', or 'organisms'. ComponentName must be Capitalised, but checks for both of this necessities are within the script.
+
+### Committing changes
+
+This project usings commitlint to check commit messages adhere to [conventional commits specifications](https://www.conventionalcommits.org/en/v1.0.0/#specification)
+
+A pre-commit is also set up to run linting on the whole project.
 
 ## How this app was/is being developed
 
