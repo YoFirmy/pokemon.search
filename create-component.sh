@@ -4,9 +4,9 @@ if [ $# -ne 2 ]
 then
   echo "Must give 2 arguments: atoms/molecules/organisms, followed by the component name"
   exit 1
-elif [[ ! "|atoms|molecules|organisms|" =~ "|${1}|" ]]
+elif [[ ! "|atoms|molecules|organisms|layouts|" =~ "|${1}|" ]]
 then
-  echo "1st argument must be either 'atoms', 'molecules', or 'organisms'"
+  echo "1st argument must be either 'layouts', 'atoms', 'molecules', or 'organisms'"
   exit 2
 elif [[ ! "${2}" =~ ^[A-Z] ]]
 then
