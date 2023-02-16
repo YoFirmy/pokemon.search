@@ -9,6 +9,11 @@ const breakpoints: Record<Breakpoints, number> = {
   desktopXL: 1808,
 };
 
+const mediaQuery = Object.entries(breakpoints).reduce(
+  (prev, [key, breakpoint]) => ({ ...prev, [key]: `@media (min-width: ${breakpoint}px)` }),
+  {} as Record<Breakpoints, string>,
+);
+
 const colors: Record<Colors, string> = {
   black: '#000000',
   white: '#FFFFFF',
@@ -30,7 +35,7 @@ const boxShadow: Record<BoxShadow, string> = {
 };
 
 const theme: Theme = {
-  breakpoints,
+  mediaQuery,
   colors,
   fontSizes: {
     12: '0.75rem',

@@ -1,6 +1,7 @@
-import { ThemeProvider } from '@emotion/react';
+import { Global, ThemeProvider } from '@emotion/react';
 import * as NextImage from 'next/image';
 
+import { globals } from '../styles/globals';
 import theme from '../styles/theme';
 
 const BREAKPOINTS_INT = {
@@ -44,11 +45,13 @@ export const parameters = {
     },
   },
   viewport: { viewports: customViewports },
+  layout: 'fullscreen',
 };
 
 export const decorators = [
   (Story) => (
     <ThemeProvider theme={theme}>
+      <Global styles={globals} />
       <Story />
     </ThemeProvider>
   ),

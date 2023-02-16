@@ -1,18 +1,28 @@
 import styled from '@emotion/styled';
-import type { NextPage } from 'next';
 
-const PageContainer = styled.main(({ theme }) => ({
-  backgroundColor: theme.colors.seaFoam,
-}));
+import { NextPageWithLayout } from 'pages/page';
 
-const Home: NextPage = () => (
+import PrimaryLayout from 'components/layouts/PrimaryLayout/PrimaryLayout';
+
+const PageContainer = styled.div({
+  flex: 1,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+});
+
+const Home: NextPageWithLayout = () => (
   <PageContainer>
-    <h1>Homepage</h1>
-    <h2>Sub Title</h2>
-    <h3>Sub Title</h3>
-    <h4>Sub Title</h4>
-    <p>paragraph</p>
+    <div>
+      <h1>Homepage</h1>
+      <h2>Sub Title</h2>
+      <h3>Sub Title</h3>
+      <h4>Sub Title</h4>
+      <p>paragraph</p>
+    </div>
   </PageContainer>
 );
 
 export default Home;
+
+Home.getLayout = (page) => <PrimaryLayout>{page}</PrimaryLayout>;
