@@ -36,7 +36,7 @@ To run this script:
 yarn create-component <location> <ComponentName>
 ```
 
-The project using atomic design so location must be either 'atoms', 'molecules', or 'organisms'. ComponentName must be Capitalised, but checks for both of this necessities are within the script.
+The project using atomic design so location must be either 'layouts', 'atoms', 'molecules', or 'organisms'. ComponentName must be Capitalised, but checks for both of this necessities are within the script.
 
 ### Committing changes
 
