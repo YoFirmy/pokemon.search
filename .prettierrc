@@ -8,8 +8,10 @@
     "<THIRD_PARTY_MODULES>",
     "^pages/(.*)$",
     "^components/(.*)$",
-    "^[./]",
-    "^styles/(.*)$"
+    "^types/(.*)$",
+    "^utils/(.*)$",
+    "^styles/(.*)$",
+    "^[./]"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true

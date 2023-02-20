@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import capitalise from 'utils/Capitalise';
+
+import capitalise from 'utils/capitalise';
 
 export interface DetailsLayoutProps {
   pokemon: {
