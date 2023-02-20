@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
 import { useCombobox } from 'downshift';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ChevronDown from 'components/icons/ChevronDown.svg';
 import ChevronUp from 'components/icons/ChevronUp.svg';
 
 export interface DropdownProps {
   items: string[];
+  id: string;
+  isLoading: boolean;
 }
 
 const NotVisibleLabel = styled.label({
@@ -98,7 +100,7 @@ const ListItem = styled.li(({ theme }) => ({
   },
 }));
 
-const Dropdown: React.FC<DropdownProps> = ({ items }) => {
+const Dropdown: React.FC<DropdownProps> = ({ items, id, isLoading }) => {
   const [filteredItems, setFilteredItems] = useState(items);
   const { isOpen, getToggleButtonProps, getLabelProps, getMenuProps, getInputProps, getItemProps } =
     useCombobox({
@@ -110,14 +112,26 @@ const Dropdown: React.FC<DropdownProps> = ({ items }) => {
         );
       },
       items: filteredItems,
+      id: id,
     });
+
+  useEffect(() => setFilteredItems(items), [items]);
 
   return (
     <>
       <InputWrapper>
         <NotVisibleLabel {...getLabelProps()}>Search for a Pokemon</NotVisibleLabel>
-        <StyledInput placeholder="Select a pokemon..." {...getInputProps()} />
-        <StyledButton aria-label="toggle menu" type="button" {...getToggleButtonProps()}>
+        <StyledInput
+          {...getInputProps()}
+          placeholder={isLoading ? 'Loading...' : 'Select a pokemon...'}
+          disabled={isLoading}
+        />
+        <StyledButton
+          {...getToggleButtonProps()}
+          aria-label="toggle menu"
+          type="button"
+          disabled={isLoading}
+        >
           {isOpen ? <ChevronUp /> : <ChevronDown />}
         </StyledButton>
       </InputWrapper>

@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
+import useInternalGetter from 'hooks/useInternalGetter';
+import { useEffect } from 'react';
 
 import Dropdown from 'components/atoms/Dropdown/Dropdown';
-import mockDropdownProps from 'components/atoms/Dropdown/Dropdown.mocks';
 
 const Container = styled.section(({ theme }) => ({
   padding: '16px',
@@ -12,9 +13,15 @@ const Container = styled.section(({ theme }) => ({
 }));
 
 const CenterModule: React.FC = () => {
+  const { fetchData, data, isLoading } = useInternalGetter('list');
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <Container>
-      <Dropdown items={mockDropdownProps.base.items} />
+      <Dropdown id="pokemon-list-dropdown" items={data?.pokemonList || []} isLoading={isLoading} />
     </Container>
   );
 };

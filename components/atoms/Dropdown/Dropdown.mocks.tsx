@@ -12,6 +12,8 @@ const base: DropdownProps = {
     'wartortle',
     'blastoise',
   ],
+  id: 'storybook-dropdown',
+  isLoading: false,
 };
 
 const mockDropdownProps = {
