@@ -1,19 +1,15 @@
+import { GetServerSideProps } from 'next';
+
 import { NextPageWithLayout } from 'pages/page';
 
 import DetailsLayout from 'components/layouts/DetailsLayout/DetailsLayout';
-import mockDetailsLayoutProps from 'components/layouts/DetailsLayout/DetailsLayout.mocks';
 import PrimaryLayout from 'components/layouts/PrimaryLayout/PrimaryLayout';
 
+import getPokemonDetails from 'services/pokemonApi/pokemonDetails/getPokemonDetails';
+import { PokemonDetails } from 'services/pokemonApi/pokemonDetails/pokemonDetailsParser';
+
 interface DetailsProps {
-  pokemon: {
-    name: string;
-    gameIndex: number;
-    height: number;
-    weight: number;
-    moves: string[];
-    types: string[];
-    image: string;
-  };
+  pokemon: PokemonDetails;
 }
 
 const Details: NextPageWithLayout<DetailsProps> = ({ pokemon }) => (
@@ -24,8 +20,13 @@ export default Details;
 
 Details.getLayout = (page) => <PrimaryLayout>{page}</PrimaryLayout>;
 
-export const getServerSideProps = () => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const pokemon = await getPokemonDetails(ctx.query.pokemon as string);
+
   return {
-    props: mockDetailsLayoutProps.base,
+    notFound: !pokemon,
+    props: {
+      pokemon,
+    },
   };
 };

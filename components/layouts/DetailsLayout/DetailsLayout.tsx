@@ -1,18 +1,12 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 
+import { PokemonDetails } from 'services/pokemonApi/pokemonDetails/pokemonDetailsParser';
+
 import capitalise from 'utils/capitalise';
 
 export interface DetailsLayoutProps {
-  pokemon: {
-    name: string;
-    gameIndex: number;
-    height: number;
-    weight: number;
-    moves: string[];
-    types: string[];
-    image: string;
-  };
+  pokemon: PokemonDetails;
 }
 
 const Container = styled.div({
@@ -61,7 +55,11 @@ const DetailValueList = styled.ul({
 const DetailsLayout: React.FC<DetailsLayoutProps> = ({ pokemon }) => (
   <Container>
     <ImageWrapper>
-      <Image src={pokemon.image} alt={pokemon.name} width="300" height="300" />
+      {pokemon.image ? (
+        <Image src={pokemon.image} alt={pokemon.name} width="300" height="300" />
+      ) : (
+        <p>pokemon image not found...</p>
+      )}
     </ImageWrapper>
     <RightSideWrapper>
       <Title>{capitalise(pokemon.name)} Details</Title>

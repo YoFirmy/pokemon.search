@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-import pokemonListParser from './pokemonListParser';
+import pokemonListParser from 'services/pokemonApi/pokemonList/pokemonListParser';
 
 const getPokemonList = async () => {
   const result = await axios
