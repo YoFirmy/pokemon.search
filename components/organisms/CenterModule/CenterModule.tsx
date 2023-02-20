@@ -4,7 +4,7 @@ import Dropdown from 'components/atoms/Dropdown/Dropdown';
 import mockDropdownProps from 'components/atoms/Dropdown/Dropdown.mocks';
 
 const Container = styled.section(({ theme }) => ({
-  padding: '20px',
+  padding: '16px',
   borderStyle: 'double',
   borderWidth: '8px',
   borderColor: theme.colors.brown,
