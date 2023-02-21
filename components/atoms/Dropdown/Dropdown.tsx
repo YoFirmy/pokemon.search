@@ -20,7 +20,7 @@ const NotVisibleLabel = styled.label({
   clip: 'rect(0,0,0,0)',
 });
 
-const StyledInput = styled.input(({ theme }) => ({
+const StyledInput = styled.input<{ isLoading: boolean }>(({ isLoading, theme }) => ({
   border: 'none',
   padding: '8px',
   backgroundColor: 'transparent',
@@ -28,6 +28,7 @@ const StyledInput = styled.input(({ theme }) => ({
   color: theme.colors.black,
   flex: 1,
   fontSize: theme.fontSizes[12],
+  cursor: isLoading ? 'wait' : 'text',
 
   [theme.mediaQuery.tablet]: {
     fontSize: theme.fontSizes[16],
@@ -50,14 +51,14 @@ const InputWrapper = styled.div(({ theme }) => ({
   },
 }));
 
-const StyledButton = styled.button({
+const StyledButton = styled.button<{ isLoading: boolean }>(({ isLoading }) => ({
   border: 'none',
   padding: '8px',
   backgroundColor: 'transparent',
   display: 'flex',
   alignItems: 'center',
-  cursor: 'pointer',
-});
+  cursor: isLoading ? 'wait' : 'pointer',
+}));
 
 const DropDownWrapper = styled.div<{ isOpen: boolean }>(({ theme, isOpen }) => ({
   position: 'absolute',
@@ -70,6 +71,15 @@ const DropDownWrapper = styled.div<{ isOpen: boolean }>(({ theme, isOpen }) => (
   borderRadius: '0 0 8px 8px',
   minWidth: '260px',
 
+  '::-webkit-scrollbar': {
+    backgroundColor: 'transparent',
+  },
+
+  '::-webkit-scrollbar-thumb': {
+    backgroundColor: theme.colors.brown,
+    borderRadius: '10px',
+  },
+
   [theme.mediaQuery.tablet]: {
     minWidth: '400px',
   },
@@ -79,10 +89,13 @@ const DropDownWrapper = styled.div<{ isOpen: boolean }>(({ theme, isOpen }) => (
   },
 }));
 
-const List = styled.ul<{ isOpen: boolean }>(({ isOpen }) => ({
+const List = styled.ul<{ isOpen: boolean }>(({ isOpen, theme }) => ({
   margin: 0,
   listStyle: 'none',
   padding: isOpen ? '8px' : 0,
+  borderRightStyle: 'solid',
+  borderRightWidth: '1px',
+  borderRightColor: theme.colors.brown,
 }));
 
 const ListItem = styled.li(({ theme }) => ({
@@ -118,19 +131,21 @@ const Dropdown: React.FC<DropdownProps> = ({ items, id, isLoading }) => {
   useEffect(() => setFilteredItems(items), [items]);
 
   return (
-    <>
+    <div>
       <InputWrapper>
         <NotVisibleLabel {...getLabelProps()}>Search for a Pokemon</NotVisibleLabel>
         <StyledInput
           {...getInputProps()}
           placeholder={isLoading ? 'Loading...' : 'Select a pokemon...'}
           disabled={isLoading}
+          isLoading={isLoading}
         />
         <StyledButton
           {...getToggleButtonProps()}
           aria-label="toggle menu"
           type="button"
           disabled={isLoading}
+          isLoading={isLoading}
         >
           {isOpen ? <ChevronUp /> : <ChevronDown />}
         </StyledButton>
@@ -149,7 +164,7 @@ const Dropdown: React.FC<DropdownProps> = ({ items, id, isLoading }) => {
             ))}
         </List>
       </DropDownWrapper>
-    </>
+    </div>
   );
 };
 
