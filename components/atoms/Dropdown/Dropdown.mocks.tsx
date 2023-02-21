@@ -14,6 +14,7 @@ const base: DropdownProps = {
   ],
   id: 'storybook-dropdown',
   isLoading: false,
+  onItemSelected: (item) => console.log(item),
 };
 
 const mockDropdownProps = {
