@@ -17,6 +17,7 @@ const mediaQuery = Object.entries(breakpoints).reduce(
 const colors: Record<Colors, string> = {
   black: '#000000',
   white: '#FFFFFF',
+  greyLight: '#AAAACA',
   greyDark: '#404868',
   seaFoamLight: '#9ECFBE',
   seaFoam: '#86C8AE',

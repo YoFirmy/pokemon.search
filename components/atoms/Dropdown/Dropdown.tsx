@@ -9,6 +9,7 @@ export interface DropdownProps {
   items: string[];
   id: string;
   isLoading: boolean;
+  onItemSelected: (_item: string | null) => void;
 }
 
 const NotVisibleLabel = styled.label({
@@ -113,22 +114,31 @@ const ListItem = styled.li(({ theme }) => ({
   },
 }));
 
-const Dropdown: React.FC<DropdownProps> = ({ items, id, isLoading }) => {
+const Dropdown: React.FC<DropdownProps> = ({ items, id, isLoading, onItemSelected }) => {
   const [filteredItems, setFilteredItems] = useState(items);
-  const { isOpen, getToggleButtonProps, getLabelProps, getMenuProps, getInputProps, getItemProps } =
-    useCombobox({
-      onInputValueChange({ inputValue }) {
-        setFilteredItems(
-          items.filter(
-            (item) => !inputValue || item.toLowerCase().includes(inputValue.toLowerCase()),
-          ),
-        );
-      },
-      items: filteredItems,
-      id: id,
-    });
+  const {
+    isOpen,
+    getToggleButtonProps,
+    getLabelProps,
+    getMenuProps,
+    getInputProps,
+    getItemProps,
+    selectedItem,
+  } = useCombobox({
+    onInputValueChange({ inputValue }) {
+      setFilteredItems(
+        items.filter(
+          (item) => !inputValue || item.toLowerCase().includes(inputValue.toLowerCase()),
+        ),
+      );
+    },
+    items: filteredItems,
+    id: id,
+  });
 
   useEffect(() => setFilteredItems(items), [items]);
+
+  useEffect(() => onItemSelected(selectedItem), [selectedItem]);
 
   return (
     <div>

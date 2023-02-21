@@ -9,6 +9,10 @@ export const globals = `
     -webkit-font-smoothing: antialiased;
   }
 
+  button {
+    font-family: 'Press Start 2P', cursive;
+  }
+
   a {
     color: inherit;
     text-decoration: none;

@@ -6,6 +6,7 @@ declare module '@emotion/react' {
   export type Colors =
     | 'black'
     | 'white'
+    | 'greyLight'
     | 'greyDark'
     | 'seaFoamLight'
     | 'seaFoam'
