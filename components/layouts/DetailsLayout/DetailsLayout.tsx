@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 
+import ImageNotFound from 'components/atoms/ImageNotFound/ImageNotFound';
 import DetailListRow from 'components/molecules/DetailListRow/DetailListRow';
 import DetailRow from 'components/molecules/DetailRow/DetailRow';
 
@@ -19,7 +20,7 @@ const Container = styled.div({
   paddingTop: '40px',
 });
 
-const ImageWrapper = styled.div({
+const LeftSideWrapper = styled.div({
   flex: 1,
   display: 'flex',
   justifyContent: 'center',
@@ -39,13 +40,13 @@ const Title = styled.h1({
 
 const DetailsLayout: React.FC<DetailsLayoutProps> = ({ pokemon }) => (
   <Container>
-    <ImageWrapper>
+    <LeftSideWrapper>
       {pokemon.image ? (
         <Image src={pokemon.image} alt={pokemon.name} width="300" height="300" />
       ) : (
-        <p>pokemon image not found...</p>
+        <ImageNotFound />
       )}
-    </ImageWrapper>
+    </LeftSideWrapper>
     <RightSideWrapper>
       <Title>{capitalise(pokemon.name)} Details</Title>
       <DetailRow label="Game index" value={pokemon.gameIndex} />
