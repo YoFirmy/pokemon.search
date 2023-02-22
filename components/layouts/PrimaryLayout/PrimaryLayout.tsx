@@ -6,7 +6,7 @@ export interface PrimaryLayoutProps {
 
 const Container = styled.main(({ theme }) => ({
   minHeight: '100vh',
-  minWidth: '100vw',
+  minWidth: '100%',
   padding: '20px',
   backgroundColor: theme.colors.seaFoam,
   display: 'flex',
