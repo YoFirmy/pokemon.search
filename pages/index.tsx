@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Head from 'next/head';
 
 import { NextPageWithLayout } from 'pages/page';
 
@@ -13,9 +14,14 @@ const PageContainer = styled.div({
 });
 
 const Home: NextPageWithLayout = () => (
-  <PageContainer>
-    <CenterModule />
-  </PageContainer>
+  <>
+    <Head>
+      <title>Home | Pokemon Search</title>
+    </Head>
+    <PageContainer>
+      <CenterModule />
+    </PageContainer>
+  </>
 );
 
 export default Home;

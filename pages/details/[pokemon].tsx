@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 
 import { NextPageWithLayout } from 'pages/page';
 
@@ -8,12 +9,19 @@ import PrimaryLayout from 'components/layouts/PrimaryLayout/PrimaryLayout';
 import getPokemonDetails from 'services/pokemonApi/pokemonDetails/getPokemonDetails';
 import { PokemonDetails } from 'services/pokemonApi/pokemonDetails/pokemonDetailsParser';
 
+import capitalise from 'utils/capitalise';
+
 interface DetailsProps {
   pokemon: PokemonDetails;
 }
 
 const Details: NextPageWithLayout<DetailsProps> = ({ pokemon }) => (
-  <DetailsLayout pokemon={pokemon} />
+  <>
+    <Head>
+      <title>{capitalise(pokemon.name)} details | Pokemon search</title>
+    </Head>
+    <DetailsLayout pokemon={pokemon} />
+  </>
 );
 
 export default Details;
