@@ -69,11 +69,11 @@ const DetailsLayout: React.FC<DetailsLayoutProps> = ({ pokemon }) => (
       </DetailRow>
       <DetailRow>
         <StyledP>Height: </StyledP>
-        <StyledP>{pokemon.height}</StyledP>
+        <StyledP>{pokemon.height * 10}cm</StyledP>
       </DetailRow>
       <DetailRow>
         <StyledP>Weight: </StyledP>
-        <StyledP>{pokemon.weight}</StyledP>
+        <StyledP>{pokemon.weight / 10}kg</StyledP>
       </DetailRow>
       <DetailRow>
         <StyledP>Types: </StyledP>
