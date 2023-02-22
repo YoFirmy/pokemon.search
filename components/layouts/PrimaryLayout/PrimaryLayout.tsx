@@ -10,8 +10,7 @@ const Container = styled.main(({ theme }) => ({
   padding: '20px',
   backgroundColor: theme.colors.seaFoam,
   display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
+  justifyContent: 'center',
 
   [theme.mediaQuery.tablet]: {
     padding: '32px',
