@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 
+import DetailListRow from 'components/molecules/DetailListRow/DetailListRow';
 import DetailRow from 'components/molecules/DetailRow/DetailRow';
 
 import { PokemonDetails } from 'services/pokemonApi/pokemonDetails/pokemonDetailsParser';
@@ -36,24 +37,6 @@ const Title = styled.h1({
   paddingBottom: '32px',
 });
 
-const OldDetailRow = styled.div({
-  display: 'flex',
-});
-
-const StyledP = styled.p({
-  flex: 1,
-});
-
-const DetailValueList = styled.ul({
-  flex: 1,
-  margin: 0,
-  padding: 0,
-  listStyle: 'none',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '8px',
-});
-
 const DetailsLayout: React.FC<DetailsLayoutProps> = ({ pokemon }) => (
   <Container>
     <ImageWrapper>
@@ -68,22 +51,8 @@ const DetailsLayout: React.FC<DetailsLayoutProps> = ({ pokemon }) => (
       <DetailRow label="Game index" value={pokemon.gameIndex} />
       <DetailRow label="Height" value={`${pokemon.height * 10}cm`} />
       <DetailRow label="Weight" value={`${pokemon.weight / 10}kg`} />
-      <OldDetailRow>
-        <StyledP>Types: </StyledP>
-        <DetailValueList>
-          {pokemon.types.map((type, index) => (
-            <li key={`${type}-${index}`}>{capitalise(type)}</li>
-          ))}
-        </DetailValueList>
-      </OldDetailRow>
-      <OldDetailRow>
-        <StyledP>Moves: </StyledP>
-        <DetailValueList>
-          {pokemon.moves.map((move, index) => (
-            <li key={`${move}-${index}`}>{capitalise(move)}</li>
-          ))}
-        </DetailValueList>
-      </OldDetailRow>
+      <DetailListRow label="Types" values={pokemon.types} />
+      <DetailListRow label="Moves" values={pokemon.moves} />
     </RightSideWrapper>
   </Container>
 );
