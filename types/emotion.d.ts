@@ -15,12 +15,9 @@ declare module '@emotion/react' {
     | 'brown'
     | 'brownDark';
 
-  export type BoxShadow = 'cards' | 'leftPositioned' | 'centrePositioned' | 'rightPositioned';
-
   export interface Theme {
     mediaQuery: Record<Breakpoints, string>;
     colors: Record<Colors, string>;
     fontSizes: Record<number, string>;
-    boxShadow: Record<BoxShadow, string>;
   }
 }

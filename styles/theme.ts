@@ -1,4 +1,4 @@
-import { BoxShadow, Breakpoints, Colors, Theme } from '@emotion/react';
+import { Breakpoints, Colors, Theme } from '@emotion/react';
 
 const breakpoints: Record<Breakpoints, number> = {
   mobile: 360,
@@ -27,14 +27,6 @@ const colors: Record<Colors, string> = {
   brownDark: '#A17270',
 };
 
-const boxShadow: Record<BoxShadow, string> = {
-  cards:
-    '0px 8px 24px 5px rgba(51, 63, 72, 0.05), 0px 4px 8px rgba(51, 63, 72, 0.05), 0px 6px 12px rgba(51, 63, 72, 0.02)',
-  leftPositioned: '6px 0px 24px rgba(51, 63, 72, 0.05), 6px 0px 48px rgba(51, 63, 72, 0.15)',
-  centrePositioned: '0px 6px 24px rgba(51, 63, 72, 0.05), 0px 6px 48px rgba(51, 63, 72, 0.15)',
-  rightPositioned: '-6px 0px 24px rgba(51, 63, 72, 0.05), -6px 0px 48px rgba(51, 63, 72, 0.15)',
-};
-
 const theme: Theme = {
   mediaQuery,
   colors,
@@ -56,7 +48,6 @@ const theme: Theme = {
     43: '2.6875rem',
     57: '3.5625rem',
   },
-  boxShadow,
 };
 
 export default theme;
