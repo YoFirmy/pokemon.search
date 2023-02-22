@@ -13,12 +13,17 @@ export interface DetailsLayoutProps {
   pokemon: PokemonDetails;
 }
 
-const Container = styled.div({
+const Container = styled.div(({ theme }) => ({
   flex: 1,
   display: 'flex',
   justifyContent: 'center',
-  paddingTop: '40px',
-});
+  flexDirection: 'column',
+
+  [theme.mediaQuery.tablet]: {
+    paddingTop: '40px',
+    flexDirection: 'row',
+  },
+}));
 
 const LeftSideWrapper = styled.div({
   flex: 1,
@@ -26,17 +31,26 @@ const LeftSideWrapper = styled.div({
   justifyContent: 'center',
 });
 
-const RightSideWrapper = styled.div({
+const RightSideWrapper = styled.div(({ theme }) => ({
   flex: 1,
   display: 'flex',
   flexDirection: 'column',
-  paddingTop: '80px',
   gap: '32px',
-});
 
-const Title = styled.h1({
+  [theme.mediaQuery.tablet]: {
+    paddingTop: '80px',
+  },
+}));
+
+const Title = styled.h1(({ theme }) => ({
   paddingBottom: '32px',
-});
+  fontSize: theme.fontSizes[26],
+  textAlign: 'center',
+
+  [theme.mediaQuery.tablet]: {
+    fontSize: theme.fontSizes[32],
+  },
+}));
 
 const DetailsLayout: React.FC<DetailsLayoutProps> = ({ pokemon }) => (
   <Container>
