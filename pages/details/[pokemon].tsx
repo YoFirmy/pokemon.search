@@ -19,6 +19,10 @@ const Details: NextPageWithLayout<DetailsProps> = ({ pokemon }) => (
   <>
     <Head>
       <title>{capitalise(pokemon.name)} details | Pokemon search</title>
+      <meta
+        name="description"
+        content={`This page displays some details about the pokemon ${pokemon.name}`}
+      />
     </Head>
     <DetailsLayout pokemon={pokemon} />
   </>
