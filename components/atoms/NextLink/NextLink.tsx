@@ -18,6 +18,10 @@ const Wrapper = styled.div<{ isDisabled?: boolean }>(({ isDisabled, theme }) => 
   backgroundColor: theme.colors[isDisabled ? 'greyLight' : 'brownLight'],
   cursor: isDisabled ? 'not-allowed' : 'pointer',
   color: theme.colors.greyDark,
+
+  '&:hover': {
+    backgroundColor: theme.colors[isDisabled ? 'greyLight' : 'brown'],
+  },
 }));
 
 const NextLink: React.FC<NextLinkProps> = ({ href, isDisabled, children }) =>
