@@ -9,7 +9,7 @@ export interface DropdownProps {
   items: string[];
   id: string;
   isLoading: boolean;
-  onItemSelected: (_item: string | null) => void;
+  onSelectedItemChange: (_item?: string | null) => void;
 }
 
 const NotVisibleLabel = styled.label({
@@ -61,15 +61,19 @@ const StyledButton = styled.button<{ isLoading: boolean }>(({ isLoading }) => ({
   cursor: isLoading ? 'wait' : 'pointer',
 }));
 
-const DropDownWrapper = styled.div<{ isOpen: boolean }>(({ theme, isOpen }) => ({
+const List = styled.ul<{ isOpen: boolean }>(({ isOpen, theme }) => ({
   position: 'absolute',
   maxHeight: '200px',
   overflowY: 'auto',
-  backgroundColor: theme.colors.seaFoamLight,
+  margin: 0,
+  listStyle: 'none',
+  padding: isOpen ? '8px' : 0,
   borderStyle: 'solid',
   borderWidth: isOpen ? '0 1px 1px' : 0,
   borderColor: theme.colors.brown,
   borderRadius: '0 0 8px 8px',
+  borderRightColor: theme.colors.brown,
+  backgroundColor: theme.colors.seaFoamLight,
   minWidth: '260px',
 
   '::-webkit-scrollbar': {
@@ -90,20 +94,12 @@ const DropDownWrapper = styled.div<{ isOpen: boolean }>(({ theme, isOpen }) => (
   },
 }));
 
-const List = styled.ul<{ isOpen: boolean }>(({ isOpen, theme }) => ({
-  margin: 0,
-  listStyle: 'none',
-  padding: isOpen ? '8px' : 0,
-  borderRightStyle: 'solid',
-  borderRightWidth: '1px',
-  borderRightColor: theme.colors.brown,
-}));
-
-const ListItem = styled.li(({ theme }) => ({
+const ListItem = styled.li<{ isHighlighted: boolean }>(({ isHighlighted, theme }) => ({
   padding: '8px',
   borderRadius: '4px',
   cursor: 'pointer',
   fontSize: theme.fontSizes[12],
+  backgroundColor: isHighlighted ? theme.colors.seaFoamDark : 'transparent',
 
   [theme.mediaQuery.tablet]: {
     fontSize: theme.fontSizes[16],
@@ -114,7 +110,7 @@ const ListItem = styled.li(({ theme }) => ({
   },
 }));
 
-const Dropdown: React.FC<DropdownProps> = ({ items, id, isLoading, onItemSelected }) => {
+const Dropdown: React.FC<DropdownProps> = ({ items, id, isLoading, onSelectedItemChange }) => {
   const [filteredItems, setFilteredItems] = useState(items);
   const {
     isOpen,
@@ -123,7 +119,8 @@ const Dropdown: React.FC<DropdownProps> = ({ items, id, isLoading, onItemSelecte
     getMenuProps,
     getInputProps,
     getItemProps,
-    selectedItem,
+    highlightedIndex,
+    inputValue,
   } = useCombobox({
     onInputValueChange({ inputValue }) {
       setFilteredItems(
@@ -134,11 +131,16 @@ const Dropdown: React.FC<DropdownProps> = ({ items, id, isLoading, onItemSelecte
     },
     items: filteredItems,
     id: id,
+    onSelectedItemChange: ({ selectedItem }) => onSelectedItemChange(selectedItem),
   });
 
   useEffect(() => setFilteredItems(items), [items]);
 
-  useEffect(() => onItemSelected(selectedItem), [selectedItem]);
+  useEffect(() => {
+    if (!items.includes(inputValue)) {
+      onSelectedItemChange(null);
+    }
+  }, [inputValue]);
 
   return (
     <div>
@@ -160,20 +162,22 @@ const Dropdown: React.FC<DropdownProps> = ({ items, id, isLoading, onItemSelecte
           {isOpen ? <ChevronUp /> : <ChevronDown />}
         </StyledButton>
       </InputWrapper>
-      <DropDownWrapper isOpen={isOpen}>
-        <List {...getMenuProps()} isOpen={isOpen}>
-          {isOpen &&
-            (filteredItems.length ? (
-              filteredItems.map((item, index) => (
-                <ListItem key={`${item}${index}`} {...getItemProps({ item, index })}>
-                  {item}
-                </ListItem>
-              ))
-            ) : (
-              <li role="error message">nothing matches your search...</li>
-            ))}
-        </List>
-      </DropDownWrapper>
+      <List {...getMenuProps()} isOpen={isOpen}>
+        {isOpen &&
+          (filteredItems.length ? (
+            filteredItems.map((item, index) => (
+              <ListItem
+                {...getItemProps({ item, index })}
+                key={`${item}${index}`}
+                isHighlighted={highlightedIndex === index}
+              >
+                {item}
+              </ListItem>
+            ))
+          ) : (
+            <li role="error message">nothing matches your search...</li>
+          ))}
+      </List>
     </div>
   );
 };

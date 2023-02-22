@@ -19,7 +19,7 @@ const Container = styled.section(({ theme }) => ({
 
 const CenterModule: React.FC = () => {
   const { fetchData, data, isLoading } = useInternalGetter('list');
-  const [selectedPokemon, setSelectedPokemon] = useState<string | null>(null);
+  const [selectedPokemon, setSelectedPokemon] = useState<string | null>();
 
   useEffect(() => {
     fetchData();
@@ -30,7 +30,7 @@ const CenterModule: React.FC = () => {
       <Dropdown
         id="pokemon-list-dropdown"
         items={data?.pokemonList || []}
-        onItemSelected={setSelectedPokemon}
+        onSelectedItemChange={setSelectedPokemon}
         isLoading={isLoading}
       />
       <NextLink href={`/details/${selectedPokemon}`} isDisabled={!selectedPokemon}>
