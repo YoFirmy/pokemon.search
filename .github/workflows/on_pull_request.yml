@@ -7,6 +7,17 @@ on:
     branches: [main]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: yarn install
+      - name: lint
+        run: yarn lint
   build:
     runs-on: ubuntu-latest
     steps:
@@ -17,10 +28,4 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: build
-        run: yarn build
-  lint:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: run linter
         run: yarn build
