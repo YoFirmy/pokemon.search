@@ -34,7 +34,7 @@ const CenterModule: React.FC = () => {
         isLoading={isLoading}
       />
       <NextLink href={`/details/${selectedPokemon}`} isDisabled={!selectedPokemon}>
-        {selectedPokemon ? `View ${selectedPokemon} details` : 'Make a selection first'}
+        {selectedPokemon ? `View ${selectedPokemon} details` : 'Make a selection first...'}
       </NextLink>
     </Container>
   );
