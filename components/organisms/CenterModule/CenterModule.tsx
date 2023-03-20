@@ -25,8 +25,6 @@ const CenterModule: React.FC = () => {
     fetchData();
   }, []);
 
-  igskdghfkjdshfg;
-
   return (
     <Container>
       <Dropdown
