@@ -24,6 +24,7 @@ const CenterModule: React.FC = () => {
   useEffect(() => {
     fetchData();
   }, []);
+  ThisShouldCauseLinterToFail;
 
   return (
     <Container>
