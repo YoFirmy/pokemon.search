@@ -19,6 +19,7 @@ jobs:
       - name: build
         run: yarn build
   lint:
+    runs-on: ubuntu-latest
     needs: build
     steps:
       - name: run linter
