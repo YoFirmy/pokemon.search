@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import Head from 'next/head';
 
 export interface PrimaryLayoutProps {
   children?: React.ReactNode;
@@ -25,9 +24,6 @@ const Container = styled.main(({ theme }) => ({
 const PrimaryLayout: React.FC<PrimaryLayoutProps> = ({ children }) => {
   return (
     <>
-      <Head>
-        <html lang="en-GB" />
-      </Head>
       <Container>{children}</Container>
     </>
   );
